@@ -1,0 +1,51 @@
+<p id="notice"><%= flash[:notice] %></p>
+<h1>
+    <strong>Add Spell to </strong>
+    <%= @book.name %>
+</h1>
+
+<p>
+    <%= link_to "Back to #{@book.name}", book_path %>
+    <%= link_to "Home", root_path %> 
+</p>
+
+<table>
+    <thead>
+      <tr>
+          <th>Level</th>
+          <th>Spellname</th>
+          <th>School</th>
+          <th>Classes</th>
+          <th>Concentration</th>
+          <th colspan="5"></th>
+      </tr>
+    </thead>
+    
+      <tbody>
+          <% Spell.all.each do |s| %>
+              <tr>
+                  <td><%= s.level %></td>
+                  <td><%= link_to s.name, spell_path %></td>
+                  <td><%= s.school %></td>
+                  <td>
+                      <% a = [] %>
+                      <% s.class_dis.each do |i| %>
+                      <% a << i.name %>
+                      <% end %>
+                      <%= a.join(', ') %>    
+                  </td>      
+                  <td><%= s.con_dis %></td>
+                  <td><% if @book.spells.include?(s) %>
+                      Already in book
+                      <% else %>
+                      <%= form_with(url: add_spell_book_path(@book), local: true) do |v| %>
+                      <%= hidden_field_tag 'spell_id', s.id %>
+                      <%= v.submit 'Add to Book' %>
+                      <% end %>  
+                  <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+    

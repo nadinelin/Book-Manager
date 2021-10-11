@@ -1,0 +1,20 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h1>
+  <strong>View</strong>
+  <%= @spell.name %>
+</h1>
+
+
+<table>
+    <p>Select Book: </p>
+    <tbody>
+        <tr>
+        
+        <td><%= form_with(url: add_spell_in_book_path(@spell), local: true) do |v| %></td>
+              <%= v.collection_select(:book_ids, Book.all, :id, :name, include_hidden: false )  %>
+              <%= v.submit 'Submit' %>
+        <% end %>
+        </tr>
+    </tbody>
+</table>

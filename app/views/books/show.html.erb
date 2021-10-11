@@ -1,0 +1,50 @@
+<p id="notice"><%= flash[:notice] %></p>
+<h1>
+  <Strong>Title:</Strong>
+  <%= @book.name %>
+</h1>
+
+<p>
+<%= link_to 'All Books', books_path %> |
+<%= link_to "Home", root_path %> 
+</p>
+<table>
+     <thead>
+      <tr>
+          <th>Level</th>
+          <th>Spellname</th>
+          <th>School</th>
+          <th>Classes</th>
+          <th>Concentration</th>
+          <th colspan="5"></th>
+      </tr>
+    </thead>
+      <tbody>
+          <% @book.spell_display.each do |dis| %>
+              <tr>
+                  <td><%= dis.level %></td>
+                  <td><%= dis.name %></td>  
+                  <td><%= dis.school %></td>
+                  <td>
+                      <% s = [] %>
+                      <% dis.class_dis.each do |v|%>
+                      <% s << v.name %>
+                      <% end %>
+                      <%= s.join(', ') %>
+                  </td>
+                  <td><%= dis.con_dis %></td>
+                  <td><%= form_with(url: delete_spell_path(@book), local: true) do |del| %><td>
+                      <%= hidden_field_tag 'spell', dis.id %>
+                      <%= del.submit 'Remove Spell' %>
+                      <% end %>
+                  </td>
+              </tr>
+          <% end %>
+      </tbody>
+  </table>
+
+
+
+<p>
+<%= link_to 'Add Spell', edit_book_path(@book) %>
+</p>

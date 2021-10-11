@@ -1,0 +1,49 @@
+<%= form_with(model: spell, local: true) do |form| %>
+  <% if spell.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(spell.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+        <% spell.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.select :level, [0,1,2,3,4,5,6,7,8,9] %>
+  </div>
+    
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :school %>
+    <%= form.select :school, ['Conjuration', 'Necromancy', 'Evocation', 'Abjuration', 'Transmutation', 'Divination', 'Enchantment', 'Illusion'], prompt: 'Select a School'%>
+  </div>
+
+  <div class="field">
+      <%= form.label :spellclass_ids, "Classes" %>
+      <%= form.collection_check_boxes(:spellclass_ids, Spellclass.all, :id, :name, include_hidden: false ) %>
+  </div>
+  
+  <div class="field">
+        <%= form.label :concentration, "Yes", :value => "true" %>
+        <%= form.radio_button :concentration, true%>
+        <%= form.label :concentration, "No", :value => "false" %>
+        <%= form.radio_button :concentration, false, :checked => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit' %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= flash[:notice] %></p>
+<h1>
+  <strong>View</strong>
+  <%= @spell.name %>
+</h1>
+
+
+<p>
+<%= link_to 'All Spells', spells_path %> |
+<%= link_to "Home", root_path %> 
+</p>
+
+<p>
+    <strong>Level: </strong>
+    <%= @spell.level %>
+</p>
+
+<p>
+    <strong>Name: </strong>
+    <%= @spell.name %>
+</p>
+    
+<p>
+    <strong>Name: </strong>
+    <%= @spell.school %>
+</p>
+
+<p>
+    <strong>Concentration: </strong>
+    <%= @spell.con_dis %>
+</p>
+
+<p>
+    <strong>Description: </strong>
+    <%= @spell.description %>
+</p>
+
+<p>
+    <%= link_to "Add #{@spell.name} to Book", add_path %>
+</p>

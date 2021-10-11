@@ -1,0 +1,11 @@
+<p id="notice"><%= flash[:notice] %></p>
+
+<h1>Create New</h1>
+
+<%= render 'form', spell: @spell %>
+
+<p>
+    <%= link_to 'All Spells', spells_path %> |
+    <%= link_to 'Home', root_path %>
+</p>
+
